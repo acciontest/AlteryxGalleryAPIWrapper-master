@@ -38,6 +38,16 @@ namespace AlteryxGalleryAPIWrapper
 
             return response.stream;
         }
+        public string SearchAppsGallery(string appName)
+        {
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(this.url + "/apps/gallery/?search=" + appName + "&limit=20&offset=0");
+            req.ContentType = "text/json";
+            req.Headers.Add("Authorization", string.Format("SPECIAL {0}", this.sessionId));
+
+            var response = HTTPClient.DispatchRequest(req);
+
+            return response.stream;
+        }
         public string GetAppInterface(string appPackageId)
         {
             // api/apps/{APPPACKAGEID}/interface
